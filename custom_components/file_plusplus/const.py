@@ -1,8 +1,8 @@
-"""Constants for the file integration."""
+"""Constants for the file++ integration."""
 
-DOMAIN = "file"
+DOMAIN = "file_plusplus"
 
 CONF_TIMESTAMP = "timestamp"
 
-DEFAULT_NAME = "File"
+DEFAULT_NAME = "file_plusplus"
 FILE_ICON = "mdi:file"

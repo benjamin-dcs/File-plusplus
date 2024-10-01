@@ -1,4 +1,4 @@
-"""The file component."""
+"""The file++ component."""
 
 from copy import deepcopy
 from typing import Any
@@ -44,7 +44,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         return True
     # The use of the legacy notify service was deprecated with HA Core 2024.6.0
     # and will be removed with HA Core 2024.12
-    migrate_notify_issue(hass, DOMAIN, "File", "2024.12.0")
+    migrate_notify_issue(hass, DOMAIN, "File++", "2024.12.0")
     # The YAML config was imported with HA Core 2024.6.0 and will be removed with
     # HA Core 2024.12
     ir.async_create_issue(
@@ -59,7 +59,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         translation_key="deprecated_yaml",
         translation_placeholders={
             "domain": DOMAIN,
-            "integration_title": "File",
+            "integration_title": "File++",
         },
     )
 

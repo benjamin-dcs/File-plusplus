@@ -1,4 +1,4 @@
-"""Support for file notification."""
+"""Support for file++ notification."""
 
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ async def async_get_service(
 
 
 class FileNotificationService(BaseNotificationService):
-    """Implement the notification service for the File service."""
+    """Implement the notification service for the File++ service."""
 
     def __init__(self, file_path: str, add_timestamp: bool) -> None:
         """Initialize the service."""
@@ -81,12 +81,12 @@ class FileNotificationService(BaseNotificationService):
         filepath = self._file_path
         try:
             with open(filepath, "a", encoding="utf8") as file:
-                if os.stat(filepath).st_size == 0:
-                    title = (
-                        f"{kwargs.get(ATTR_TITLE, ATTR_TITLE_DEFAULT)} notifications (Log"
-                        f" started: {dt_util.utcnow().isoformat()})\n{'-' * 80}\n"
-                    )
-                    file.write(title)
+                # if os.stat(filepath).st_size == 0:
+                #     title = (
+                #         f"{kwargs.get(ATTR_TITLE, ATTR_TITLE_DEFAULT)} notifications (Log"
+                #         f" started: {dt_util.utcnow().isoformat()})\n{'-' * 80}\n"
+                #     )
+                #     file.write(title)
 
                 if self.add_timestamp:
                     text = f"{dt_util.utcnow().isoformat()} {message}\n"
@@ -131,12 +131,12 @@ class FileNotifyEntity(NotifyEntity):
         filepath = self._file_path
         try:
             with open(filepath, "a", encoding="utf8") as file:
-                if os.stat(filepath).st_size == 0:
-                    title = (
-                        f"{title or ATTR_TITLE_DEFAULT} notifications (Log"
-                        f" started: {dt_util.utcnow().isoformat()})\n{'-' * 80}\n"
-                    )
-                    file.write(title)
+                # if os.stat(filepath).st_size == 0:
+                #     title = (
+                #         f"{title or ATTR_TITLE_DEFAULT} notifications (Log"
+                #         f" started: {dt_util.utcnow().isoformat()})\n{'-' * 80}\n"
+                #     )
+                #     file.write(title)
 
                 if self._add_timestamp:
                     text = f"{dt_util.utcnow().isoformat()} {message}\n"
