@@ -1,7 +1,6 @@
-"""Config flow for file++ integration."""
+"""Config flow for file integration."""
 
 from copy import deepcopy
-import logging
 import os
 from typing import Any
 
@@ -21,9 +20,8 @@ from homeassistant.const import (
     CONF_PLATFORM,
     CONF_UNIT_OF_MEASUREMENT,
     CONF_VALUE_TEMPLATE,
-    Platform
+    Platform,
 )
-
 from homeassistant.core import callback
 from homeassistant.helpers.selector import (
     BooleanSelector,
@@ -35,10 +33,7 @@ from homeassistant.helpers.selector import (
     TextSelectorType,
 )
 
-from .const import (CONF_TIMESTAMP, DEFAULT_NAME, DOMAIN,
-                    CONF_NOTIFY, CONF_SENSOR)
-
-_LOGGER = logging.getLogger(__name__)
+from .const import CONF_TIMESTAMP, DEFAULT_NAME, DOMAIN
 
 BOOLEAN_SELECTOR = BooleanSelector(BooleanSelectorConfig())
 TEMPLATE_SELECTOR = TemplateSelector(TemplateSelectorConfig())
@@ -73,7 +68,7 @@ FILE_FLOW_SCHEMAS = {
 
 
 class FileConfigFlowHandler(ConfigFlow, domain=DOMAIN):
-    """Handle a file++ config flow."""
+    """Handle a file config flow."""
 
     VERSION = 2
 
@@ -116,9 +111,6 @@ class FileConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                     if key not in (CONF_FILE_PATH, CONF_PLATFORM, CONF_NAME):
                         data.pop(key)
                         options[key] = value
-                _LOGGER.debug("DATA: " + str(data))
-                _LOGGER.debug("TITLE: " + str(title))
-                _LOGGER.debug("OPTIONS: " + str(options))
                 return self.async_create_entry(data=data, title=title, options=options)
 
         return self.async_show_form(
@@ -137,9 +129,7 @@ class FileConfigFlowHandler(ConfigFlow, domain=DOMAIN):
         """Handle file sensor config flow."""
         return await self._async_handle_step(Platform.SENSOR.value, user_input)
 
-    async def async_step_import(
-        self, import_data: dict[str, Any]
-    ) -> ConfigFlowResult:
+    async def async_step_import(self, import_data: dict[str, Any]) -> ConfigFlowResult:
         """Import `file`` config from configuration.yaml."""
         self._async_abort_entries_match(import_data)
         platform = import_data[CONF_PLATFORM]
@@ -162,12 +152,12 @@ class FileConfigFlowHandler(ConfigFlow, domain=DOMAIN):
 
 
 class FileOptionsFlowHandler(OptionsFlowWithConfigEntry):
-    """Handle File++ options."""
+    """Handle File options."""
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
-        """Manage File++ options."""
+        """Manage File options."""
         if user_input:
             return self.async_create_entry(data=user_input)
 

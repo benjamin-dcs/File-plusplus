@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import os
 
-# from file_read_backwards import FileReadBackwards
+from file_read_backwards import FileReadBackwards
 import voluptuous as vol
 
 from homeassistant.components.sensor import (
@@ -98,37 +98,12 @@ class FileSensor(SensorEntity):
     def update(self) -> None:
         """Get the latest entry from a file and updates the state."""
         try:
-            # with FileReadBackwards(self._file_path, encoding="utf-8") as file_data:
-            #     for line in file_data:
-            #         data = line
-            #         break
-            #     data = data.strip()
-            with open(self._file_path, encoding="utf-8") as f:
-                data = f.read()
-        except (IndexError, FileNotFoundError, IsADirectoryError, UnboundLocalError) as e:
-            _LOGGER.warning(
-                "File or data not present at the moment: %s",
-                os.path.basename(self._file_path),
-            )
-            return
-
-        self._attr_native_value = "Ok"
-
-        # if self._val_tpl is not None:
-        #     self._attr_native_value = (
-        #         self._val_tpl.async_render_with_possible_json_value(data, None)
-        #     )
-        # else:
-        #     self._attr_native_value = data
-    
-    @property
-    def extra_state_attributes(self):
-        """Return device state attributes."""
-
-        try:
-            with open(self._file_path, encoding="utf-8") as f:
-                data = f.read()
-        except (IndexError, FileNotFoundError, IsADirectoryError, UnboundLocalError) as e:
+            with FileReadBackwards(self._file_path, encoding="utf-8") as file_data:
+                for line in file_data:
+                    data = line
+                    break
+                data = data.strip()
+        except (IndexError, FileNotFoundError, IsADirectoryError, UnboundLocalError):
             _LOGGER.warning(
                 "File or data not present at the moment: %s",
                 os.path.basename(self._file_path),
@@ -136,12 +111,8 @@ class FileSensor(SensorEntity):
             return
 
         if self._val_tpl is not None:
-            content = (
+            self._attr_native_value = (
                 self._val_tpl.async_render_with_possible_json_value(data, None)
             )
         else:
-            content = data
-
-        return {
-            "content": content,
-        }
+            self._attr_native_value = data
