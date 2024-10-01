@@ -21,7 +21,7 @@ from homeassistant.const import (
     CONF_PLATFORM,
     CONF_UNIT_OF_MEASUREMENT,
     CONF_VALUE_TEMPLATE,
-    Platform
+    Platform,
 )
 
 from homeassistant.core import callback
@@ -35,8 +35,7 @@ from homeassistant.helpers.selector import (
     TextSelectorType,
 )
 
-from .const import (CONF_TIMESTAMP, DEFAULT_NAME, DOMAIN,
-                    CONF_NOTIFY, CONF_SENSOR)
+from .const import CONF_TIMESTAMP, DEFAULT_NAME, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -116,9 +115,6 @@ class FileConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                     if key not in (CONF_FILE_PATH, CONF_PLATFORM, CONF_NAME):
                         data.pop(key)
                         options[key] = value
-                _LOGGER.debug("DATA: " + str(data))
-                _LOGGER.debug("TITLE: " + str(title))
-                _LOGGER.debug("OPTIONS: " + str(options))
                 return self.async_create_entry(data=data, title=title, options=options)
 
         return self.async_show_form(
