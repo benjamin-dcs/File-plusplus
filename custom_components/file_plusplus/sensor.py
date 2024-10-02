@@ -62,7 +62,7 @@ async def async_setup_entry(
     options = dict(entry.options)
     file_path: str = config[CONF_FILE_PATH]
     unique_id: str = entry.entry_id
-    name: str = config.get(CONF_NAME, DEFAULT_NAME)
+    name: str = config.get(CONF_NAME, DEFAULT_NAME) + "_" + file_path.split("/")[-1].replace(".", "_")
     unit: str | None = options.get(CONF_UNIT_OF_MEASUREMENT)
     value_template: Template | None = None
 
