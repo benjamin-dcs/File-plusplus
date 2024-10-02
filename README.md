@@ -17,10 +17,10 @@ Based on the Home Assistant Core Integrations [`File`](https://www.home-assistan
 
 # Installation
 
-## 1a. Install via HACS (recommended) 
+## Install via HACS (recommended) 
 Publish via HACS in progress..
 
-## 1b. Manual install
+## Manual install
 1) Download the latest release of the File++ from this repository;
 2) In Home Assistant, create a folder `config/custom_components`;
 3) Add the File++ files to the `custom_components` folder (you should end up it with a `config/custom_components/file_plusplus` folder);
