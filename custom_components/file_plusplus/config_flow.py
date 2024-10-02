@@ -23,7 +23,6 @@ from homeassistant.const import (
     CONF_VALUE_TEMPLATE,
     Platform,
 )
-
 from homeassistant.core import callback
 from homeassistant.helpers.selector import (
     BooleanSelector,
@@ -115,9 +114,6 @@ class FileConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                     if key not in (CONF_FILE_PATH, CONF_PLATFORM, CONF_NAME):
                         data.pop(key)
                         options[key] = value
-                _LOGGER.debug("DATA: " + str(data))
-                _LOGGER.debug("TITLE: " + str(title))
-                _LOGGER.debug("OPTIONS: " + str(options))
                 return self.async_create_entry(data=data, title=title, options=options)
 
         return self.async_show_form(
