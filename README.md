@@ -1,8 +1,14 @@
 # File++
-Based on the Home Assistant Core Integrations [`File`](https://www.home-assistant.io/integrations/file/), I created a custom version that reads and writes **multi-line** content. I personally use this to load email-templates and store data larger than 255 characters (which is the max of a Text Helper (any entity for that matter)).
+Based on the Home Assistant Core Integrations [`File`](https://www.home-assistant.io/integrations/file/), I created a custom version that reads and writes **multi-line** content. 
+
+**Use case examples:**
+- Store and read data larger than 255 characters
+- Load email HTML templates
+- Store large AI/ChatGPT responses
+- ... and much more!
 
 **Features:**
-- Use the `notify` service to write multi-line content to a local file
+- Use the `notify` service to write multi-line content to a local file. If a file already exists, its content will be erased and the new content will be stored
 - Use the `sensor` service to read multi-line content from a local file. The content is available in the `content` attribute of the sensor.
 
 **Removed:**
