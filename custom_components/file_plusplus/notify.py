@@ -115,15 +115,16 @@ class FileNotifyEntity(NotifyEntity):
         self._file_path: str = config[CONF_FILE_PATH]
         self._add_timestamp: bool = config.get(CONF_TIMESTAMP, False)
         # Only import a name from an imported entity
-        self._attr_name = config.get(CONF_NAME, DEFAULT_NAME)
+        self._attr_name = config.get(CONF_NAME, DEFAULT_NAME) + "_" + self._file_path.split("/")[-1].replace(".", "_")
         self._attr_unique_id = unique_id
 
     def send_message(self, message: str, title: str | None = None) -> None:
         """Send a message to a file."""
         file: TextIO
         filepath = self._file_path
+        message = message.strip()
         try:
-            with open(filepath, "a", encoding="utf8") as file:
+            with open(filepath, "w", encoding="utf8") as file:
                 if self._add_timestamp:
                     text = f"{dt_util.utcnow().isoformat()} {message}\n"
                 else:
