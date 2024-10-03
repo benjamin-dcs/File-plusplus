@@ -77,6 +77,10 @@ async def async_setup_entry(
 class FileSensor(SensorEntity):
     """Implementation of a file sensor."""
 
+    _entity_component_unrecorded_attributes = frozenset(
+        {"content"}
+    )
+
     _attr_icon = FILE_ICON
 
     def __init__(
