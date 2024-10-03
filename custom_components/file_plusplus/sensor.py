@@ -77,7 +77,7 @@ async def async_setup_entry(
 class FileSensor(SensorEntity):
     """Implementation of a file sensor."""
 
-    _entity_component_unrecorded_attributes = frozenset(
+    _unrecorded_attributes = frozenset(
         {"content"}
     )
 
