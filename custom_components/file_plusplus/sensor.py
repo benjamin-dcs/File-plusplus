@@ -99,23 +99,15 @@ class FileSensor(SensorEntity):
         self._attr_unique_id = unique_id
 
     def update(self) -> None:
-        """Get the latest entry from a file and updates the state."""
-        try:
-
-            with open(self._file_path, encoding="utf-8") as f:
-                data = f.read()
-        except (IndexError, FileNotFoundError, IsADirectoryError, UnboundLocalError) as e:
-            _LOGGER.warning(
-                "File or data not present at the moment: %s",
-                os.path.basename(self._file_path),
-            )
-            return
-
+        """Return entity state."""
         self._attr_native_value = "Ok"
 
     @property
     def extra_state_attributes(self):
-        """Return device state attributes."""
+        """
+        Return entity state attributes.
+        Get the latest entry from a file and updates the state.
+        """
 
         try:
             with open(self._file_path, encoding="utf-8") as f:
@@ -125,9 +117,9 @@ class FileSensor(SensorEntity):
                 "File or data not present at the moment: %s",
                 os.path.basename(self._file_path),
             )
-            return
+            data = ""
 
-        if self._val_tpl is not None:
+        if data and self._val_tpl is not None:
             content = (
                 self._val_tpl.async_render_with_possible_json_value(data, None)
             )
