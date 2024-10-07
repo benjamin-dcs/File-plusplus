@@ -15,6 +15,9 @@ Based on the Home Assistant Core Integrations [`File`](https://www.home-assistan
 - State of the `sensor` no longer holds the content of the file. Shows 'Ok' (for now :) ).
 - No header is written to empty/new files
 
+**Notes:**
+- ⚠︎ I have **not** limited the size of the filesize for the `sensor` service. On a dev setup I successfully read the 10M ([Studenten Net Twente FTP](https://ftp.snt.utwente.nl/pub/test/)) file. The 1000M ended up in a crash-reboot loop from HA.
+
 # Installation
 
 ## Install via HACS (recommended) 
