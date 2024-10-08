@@ -32,5 +32,8 @@ Waiting on HACS to be added. In the meantime, this repo can be added as [`custom
 
 For updates, repeat step 1 to 4. Home Assistant will not delete any configuration.
 
+# Configuration
+Configuration is done the same as the Home Assistant Core Integrations [`File`](https://www.home-assistant.io/integrations/file/)
+
 # Support
 <a href="https://www.buymeacoffee.com/benjamindcs" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
